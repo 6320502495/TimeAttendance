@@ -44,6 +44,9 @@
 | ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) | IDE | โปรแกรมประยุกต์ซอฟต์แวร์ที่ช่วยให้โปรแกรมเมอร์พัฒนาซอฟต์แวร์ได้อย่างมีประสิทธิภาพ ในที่นี่ใช้ในการทำทุกๆอย่าง |
 | ![Xampp](https://img.shields.io/badge/Xampp-F37623?style=for-the-badge&logo=xampp&logoColor=white) | Frameworks & Library | XAMPP Version: 7.4.29 |
 | ![NodeJS](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) | Frameworks & Library | ใช้สำหรับการ Coding Backend |
+| ![VueJS](https://img.shields.io/badge/Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D) | Frameworks & Library | ใช้สำหรับการ Coding Frontend ติดต่อกันผู้ใช้งาน |
+| ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) | Design | ใช้สำหรับออกแบบหน้าเว็บไซต์ในการพัฒนา |
+| ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) | Database | ใช้สำหรับเก็บข้อมูล |
 ---
 ##### _2 การออกแบบเว็บไซต์_
 
