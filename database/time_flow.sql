@@ -106,7 +106,7 @@ CREATE TABLE `leave_request` (
   `leave_request_duration` enum('ลาเต็มวัน','ลาครึ่งวันเช้า','ลาครึ่งวันบ่าย') NOT NULL,
   `leave_request_start_date` date NOT NULL,
   `leave_request_end_date` date NOT NULL,
-  `leave_request_note` varchar(255) NOT NULL,
+  `leave_request_note` varchar(255) DEFAULT NULL,
   `leave_request_status` enum('รอดำเนินการ','อนุมัติ','ปฏิเสธ') NOT NULL DEFAULT 'รอดำเนินการ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
