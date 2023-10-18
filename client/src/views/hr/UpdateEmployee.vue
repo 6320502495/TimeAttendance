@@ -35,6 +35,8 @@
 
                   <q-input color="purple-8" v-model="employeeData.birthdate" label="วันเกิด" type="date" lazy-rules="..."
                     mask="####-##-##" @input="updateBirthdate" />
+                  <q-input color="purple-8" v-model="employeeData.birthdate" mask="####-##-##" label="วันเกิด" readonly
+                    style="display: none;" />
                   <q-input color="purple-8" v-model="employeeData.salary" label="เงินเดือน" lazy-rules :rules="[
                     val => /^\d+(\.\d{1,2})?$/.test(val) || 'รูปแบบเงินเดือนไม่ถูกต้อง (ตัวอย่าง: 5000 หรือ 5000.50)'
                   ]" />
@@ -67,6 +69,8 @@
                   ]" />
                   <q-input color="purple-8" v-model="employeeData.startDate" label="วันเริ่มงาน" type="date"
                     lazy-rules="..." mask="####-##-##" @input="updateStartDate" />
+                  <q-input color="purple-8" v-model="employeeData.startDate" mask="####-##-##" label="วันเริ่มงาน"
+                    readonly style="display: none;" />
                   <q-input color="purple-8" v-model="employeeData.idCard" label="รหัสบัตรประชาชน" lazy-rules :rules="[
                     val => val && val.length === 13 && /^[0-9]+$/.test(val) || 'รหัสบัตรประชาชนไม่ถูกต้อง'
                   ]" />
@@ -96,10 +100,12 @@
                       </template>
                     </q-file>
                   </div>
-                  <div class="mb-2">{{ employeeData.employee_profile_img ?
+                  <div class="mb-2">{{ typeof employeeData.employee_profile_img === 'string' ?
                     employeeData.employee_profile_img.replace(/^uploads\\/, '') : '' }}</div>
                   <div>
-                    <a :href="`http://localhost:3000/download-pdf/${employeeData.employee_profile_img}`" download>ดาวน์โหลดไฟล์</a>
+                    <a v-if="typeof employeeData.employee_profile_img === 'string'"
+                      :href="`http://localhost:3000/download-pdf/${employeeData.employee_profile_img}`"
+                      download>ดาวน์โหลดไฟล์</a>
                   </div>
                 </div>
                 <div style="margin: 10px;"></div>
@@ -112,10 +118,12 @@
                       </template>
                     </q-file>
                   </div>
-                  <div class="mb-2">{{ employeeData.employee_personnel_id_img ?
+                  <div class="mb-2">{{ typeof employeeData.employee_personnel_id_img === 'string' ?
                     employeeData.employee_personnel_id_img.replace(/^uploads\\/, '') : '' }}</div>
                   <div>
-                    <a :href="`http://localhost:3000/download-pdf/${employeeData.employee_profile_img}`" download>ดาวน์โหลดไฟล์</a>
+                    <a v-if="typeof employeeData.employee_profile_img === 'string'"
+                      :href="`http://localhost:3000/download-pdf/${employeeData.employee_profile_img}`"
+                      download>ดาวน์โหลดไฟล์</a>
                   </div>
                 </div>
                 <div style="margin: 10px;"></div>
@@ -128,10 +136,12 @@
                       </template>
                     </q-file>
                   </div>
-                  <div class="mb-2">{{ employeeData.employee_transcript_img ?
+                  <div class="mb-2">{{ typeof employeeData.employee_transcript_img === 'string' ?
                     employeeData.employee_transcript_img.replace(/^uploads\\/, '') : '' }}</div>
                   <div>
-                    <a :href="`http://localhost:3000/download-pdf/${employeeData.employee_transcript_img}`" download>ดาวน์โหลดไฟล์</a>
+                    <a v-if="typeof employeeData.employee_profile_img === 'string'"
+                      :href="`http://localhost:3000/download-pdf/${employeeData.employee_transcript_img}`"
+                      download>ดาวน์โหลดไฟล์</a>
                   </div>
                 </div>
                 <div style="margin: 10px;"></div>
@@ -144,10 +154,12 @@
                       </template>
                     </q-file>
                   </div>
-                  <div class="mb-2">{{ employeeData.employee_contract ?
+                  <div class="mb-2">{{ typeof employeeData.employee_contract === 'string' ?
                     employeeData.employee_contract.replace(/^uploads\\/, '') : '' }}</div>
                   <div>
-                    <a :href="`http://localhost:3000/download-pdf/${employeeData.employee_contract}`" download>ดาวน์โหลดไฟล์</a>
+                    <a v-if="typeof employeeData.employee_profile_img === 'string'"
+                      :href="`http://localhost:3000/download-pdf/${employeeData.employee_contract}`"
+                      download>ดาวน์โหลดไฟล์</a>
                   </div>
                 </div>
                 <div style="margin: 15px;"></div>
@@ -223,8 +235,8 @@ export default {
           employeeData.value.name = data.employee_name;
           employeeData.value.department = data.employee_department;
           employeeData.value.phoneNumber = data.employee_tel;
-          employeeData.value.startDate = new Date(data.employee_start_date);
-          employeeData.value.birthdate = new Date(data.employee_birthday);
+          employeeData.value.startDate = data.employee_start_date;
+          employeeData.value.birthdate = data.employee_birthday;
           employeeData.value.salary = data.employee_salary;
           employeeData.value.address = data.employee_address;
           employeeData.value.idCardBank = data.employee_bank_account;
@@ -287,11 +299,12 @@ export default {
         formData.append('employee_login_id', employeeData.value.id);
         formData.append('employee_login_password', employeeData.value.password);
 
-        // เพิ่มการส่งไฟล์
+        // Add file uploads
         formData.append('employee_profile_img', employeeData.value.employee_profile_img);
         formData.append('employee_personnel_id_img', employeeData.value.employee_personnel_id_img);
         formData.append('employee_transcript_img', employeeData.value.employee_transcript_img);
         formData.append('employee_contract', employeeData.value.employee_contract);
+
         const response = await axios.put(
           "http://localhost:3000/employee/" + router.currentRoute.value.params.id,
           formData
@@ -308,34 +321,38 @@ export default {
       }
     };
 
+    const handleProfileImageUpload = (event) => {
+      // Handle the file selection for the profile image
+      employeeData.value.employee_profile_img = event.target.files[0];
+    };
+
+    const handlePersonnelIdImageUpload = (event) => {
+      // Handle the file selection for the personnel ID image
+      employeeData.value.employee_personnel_id_img = event.target.files[0];
+    };
+
+    const handleTranscriptImageUpload = (event) => {
+      // Handle the file selection for the transcript image
+      employeeData.value.employee_transcript_img = event.target.files[0];
+    };
+
+    const handleContractUpload = (event) => {
+      // Handle the file selection for the contract
+      employeeData.value.employee_contract = event.target.files[0];
+    };
+
     return {
       employeeData,
       goBack,
       saveEmployeeData,
       updateStartDate,
       updateBirthdate,
+      handleProfileImageUpload,
+      handlePersonnelIdImageUpload,
+      handleTranscriptImageUpload,
+      handleContractUpload,
     };
   },
-
-  handleProfileImageUpload(event) {
-  // Handle the file selection for the profile image
-  employeeData.value.employee_profile_img = event.target.files[0];
-},
-
-handlePersonnelIdImageUpload(event) {
-  // Handle the file selection for the personnel ID image
-  employeeData.value.employee_personnel_id_img = event.target.files[0];
-},
-
-handleTranscriptImageUpload(event) {
-  // Handle the file selection for the transcript image
-  employeeData.value.employee_transcript_img = event.target.files[0];
-},
-
-handleContractUpload(event) {
-  // Handle the file selection for the contract
-  employeeData.value.employee_contract = event.target.files[0];
-},
 };
 </script>
   
