@@ -1,4 +1,4 @@
-<h3 align="center">มหาวิทยามหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตกําแพงแสน</h3>
+<h3 align="center">มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตกําแพงแสน</h3>
 <h5 align="center">คณะวิศวกรรมศาตร์ กำแพงแสน ภาควิชาวิศวกรรมคอมพิวเตอร์</h5>
 
 # ETAMS Project: Employee Time Attendance Management System
