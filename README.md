@@ -21,7 +21,7 @@
 
 | ชื่อ | หน้าที่ |
 | ------------- | ------------- |
-| นายธีรภัทร อักษรนันท์  | Project Manager, Frontend Developer |
+| นายธีรภัทร อักษรนันท์  | Frontend Developer |
 | นายอัษฎาวุธ คล้ายเมือง  | Full-Stack Developer |
 | นายอาบิ๊ด มหากลั่น  | Frontend Developer |
 | นายโรจนากร แย้มบางยาง  | Backend Developer |
